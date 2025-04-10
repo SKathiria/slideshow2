@@ -62,6 +62,12 @@
       margin-top: 10px;
       margin-right: 10px;
     }
+
+    #finalPrice {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #003366;
+    }
   </style>
 </head>
 <body>
@@ -84,7 +90,7 @@
   </div>
 
   <!-- Form Section -->
-  <form>
+  <form onsubmit="return calculateDiscount(event);">
     <label>Enter your Name:</label><br>
     <input type="text" name="name"><br><br>
 
@@ -105,13 +111,18 @@
       <option value="next_week">Same day next week</option>
     </select><br><br>
 
+    <label>Enter the amount (£):</label><br>
+    <input type="text" name="amount" id="amount"><br><br>
+
+    <p id="finalPrice"></p>
+
     <button type="submit">Submit</button>
     <button type="button" onclick="window.location.href='https://www.youtube.com';">Go to YouTube</button>
   </form>
   
-  
   <!-- JavaScript -->
   <script>
+    // Slideshow Functionality
     let slideIndex = 0;
     const slides = document.querySelectorAll('.slideshow-container img');
     let autoSlideInterval = setInterval(nextSlide, 3000);
@@ -136,6 +147,33 @@
     function setSlide(n) {
       clearInterval(autoSlideInterval); // stop auto play on manual click
       showSlide(n);
+    }
+
+    // Discount Logic
+    function calculateDiscount(event) {
+      event.preventDefault();
+
+      const amountInput = document.getElementById("amount").value;
+      const amount = parseFloat(amountInput);
+
+      if (isNaN(amount)) {
+        alert("Please enter a valid number for the amount.");
+        return false;
+      }
+
+      let finalAmount = amount;
+      let message = "";
+
+      if (amount > 100) {
+        const discount = amount * 0.15;
+        finalAmount = amount - discount;
+        message = `You got a 15% discount! (£${discount.toFixed(2)} off)<br>`;
+      }
+
+      message += `Total to Pay: £${finalAmount.toFixed(2)}`;
+      document.getElementById("finalPrice").innerHTML = message;
+
+      return false;
     }
   </script>
 
