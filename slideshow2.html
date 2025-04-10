@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roasted Chicken Order</title>
+  <style>
+    body {
+      background-color: #e6f2ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .slideshow-container {
+      position: relative;
+      width: 400px;
+      height: 250px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .slideshow-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .slideshow-container img.active {
+      display: block;
+    }
+
+    .slideshow-controls {
+      margin-top: 10px;
+    }
+
+    .slideshow-controls button {
+      padding: 6px 10px;
+      margin: 2px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    form {
+      background-color: white;
+      display: inline-block;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+    }
+
+    button[type="submit"], button[type="button"] {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Get The Delicious Roasted Chicken Right At Your Door</h1>
+
+  <!-- Slideshow Section -->
+  <div class="slideshow-container">
+    <img src="chickenPlate.jpg" class="active" alt="Chicken Plate">
+    <img src="chickenRoast.jpg" alt="Chicken Roast">
+    <img src="profilepic.avif" alt="Profile Picture">
+  </div>
+  
+  <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+    <img src="restaurant.webp" alt="Restaurant Dish" style="width: 250px; border-radius: 10px;">
+    <video width="320" height="240" controls style="border-radius: 10px;">
+      <source src="mickeyMouse.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Form Section -->
+  <form>
+    <label>Enter your Name:</label><br>
+    <input type="text" name="name"><br><br>
+
+    <label>Choose the taste:</label><br>
+    <input type="checkbox" name="taste" value="halal"> Halal<br>
+    <input type="checkbox" name="taste" value="spicy"> Spicy<br>
+    <input type="checkbox" name="taste" value="with_salad"> With Salad<br><br>
+
+    <label>Choose the size:</label><br>
+    <input type="radio" name="size" value="whole"> Whole<br>
+    <input type="radio" name="size" value="half"> Half<br>
+    <input type="radio" name="size" value="quarter"> Quarter<br><br>
+
+    <label>Choose the mode of delivery:</label><br>
+    <select name="delivery">
+      <option value="same_day_3h">Same day (after 3 hours)</option>
+      <option value="next_day">Next day afternoon</option>
+      <option value="next_week">Same day next week</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+    <button type="button" onclick="window.location.href='https://www.youtube.com';">Go to YouTube</button>
+  </form>
+  
+  
+  <!-- JavaScript -->
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slideshow-container img');
+    let autoSlideInterval = setInterval(nextSlide, 3000);
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[index].classList.add('active');
+      slideIndex = index;
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function changeSlide(n) {
+      clearInterval(autoSlideInterval); // stop auto play on manual click
+      slideIndex = (slideIndex + n + slides.length) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function setSlide(n) {
+      clearInterval(autoSlideInterval); // stop auto play on manual click
+      showSlide(n);
+    }
+  </script>
+
+</body>
+</html>
